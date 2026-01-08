@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Konten - Admin PT Seirama Laju</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-sidebar-header">
+                <div class="admin-logo">
+                <img src="https://media.licdn.com/dms/image/v2/C560BAQGRDZDkhwv1dQ/company-logo_200_200/company-logo_200_200/0/1640250929590?e=2147483647&v=beta&t=HCbhoBSNAv4QXd1j_9SoJna61ALyrEqVlPUPtibFOtM" alt="PT Seirama Laju" height="40">
+                <p style="color: white;">PT Seirama Laju</p>
+                </div>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="dashboard.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-tachometer-alt"></i>
+                    <span class="admin-nav-text">Dashboard</span>
+                </a>
+                
+                <a href="content.html" class="admin-nav-item active">
+                    <i class="admin-nav-icon fas fa-newspaper"></i>
+                    <span class="admin-nav-text">Kelola Konten</span>
+                    <span class="admin-nav-badge">3</span>
+                </a>
+                
+                <a href="jobs.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-briefcase"></i>
+                    <span class="admin-nav-text">Lowongan Kerja</span>
+                    <span class="admin-nav-badge">12</span>
+                </a>
+                
+            
+            <div class="admin-sidebar-footer">
+                <a href="../index.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-globe"></i>
+                    <span class="admin-nav-text">Lihat Website</span>
+                </a>
+                
+                <a href="logout.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-sign-out-alt"></i>
+                    <span class="admin-nav-text">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <h1>Kelola Konten</h1>
+                    <p>Kelola artikel, berita, dan halaman website</p>
+                </div>
+                
+                <div class="admin-header-right">
+                    <div class="admin-search">
+                        <input type="text" placeholder="Cari konten...">
+                        <i class="admin-search-icon fas fa-search"></i>
+                    </div>
+                    
+                    <button class="admin-btn primary" id="addContentBtn">
+                        <i class="fas fa-plus"></i> Konten Baru
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-filters">
+                <div class="admin-filter-group">
+                    <label for="filterCategory">Kategori:</label>
+                    <select id="filterCategory" class="admin-select">
+                        <option value="">Semua Kategori</option>
+                        <option value="berita">Berita</option>
+                        <option value="artikel">Artikel</option>
+                        <option value="proyek">Proyek</option>
+                        <option value="pengumuman">Pengumuman</option>
+                    </select>
+                </div>
+                
+                <div class="admin-filter-group">
+                    <label for="filterStatus">Status:</label>
+                    <select id="filterStatus" class="admin-select">
+                        <option value="">Semua Status</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                        <option value="pending">Pending Review</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                
+                <div class="admin-filter-group">
+                    <label for="filterDate">Tanggal:</label>
+                    <input type="date" id="filterDate" class="admin-input">
+                </div>
+                
+                <button class="admin-btn secondary" id="applyFilters">
+                    <i class="fas fa-filter"></i> Terapkan Filter
+                </button>
+                
+                <button class="admin-btn light" id="resetFilters">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th width="50">
+                                <input type="checkbox" id="selectAll">
+                            </th>
+                            <th width="60">ID</th>
+                            <th>Judul Konten</th>
+                            <th width="120">Kategori</th>
+                            <th width="100">Penulis</th>
+                            <th width="120">Tanggal</th>
+                            <th width="100">Status</th>
+                            <th width="80">Views</th>
+                            <th width="150">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>001</td>
+                            <td>
+                                <strong>Pengembangan dan modernisasi terminal BBM dengan kapasitas 500.000 KL</strong>
+                                <p class="admin-table-desc">Proyek pembangunan terminal berkapasitas di...</p>
+                            </td>
+                            <td><span class="admin-badge info">Proyek</span></td>
+                            <td>Ihsan Zikri</td>
+                            <td>29 Des 2025</td>
+                            <td><span class="admin-badge success">Published</span></td>
+                            <td>1,245</td>
+                            <td>
+                                <button class="admin-action-btn edit" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="admin-action-btn view" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="admin-action-btn delete" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>002</td>
+                            <td>
+                                <strong>PLTU Jawa Tengah</strong>
+                                <p class="admin-table-desc">Konstruksi pembangkit listrik tenaga uap</p>
+                            </td>
+                            <td><span class="admin-badge info">Proyek</span></td>
+                            <td>Ihsan Zikri</td>
+                            <td>29 Des 2025</td>
+                            <td><span class="admin-badge success">Published</span></td>
+                            <td>3,425</td>
+                            <td>
+                                <button class="admin-action-btn edit" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="admin-action-btn view" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="admin-action-btn delete" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>003</td>
+                            <td>
+                                <strong>Dimulainya Proyek Terminal BBM Strategis di Sumatera</strong>
+                                <p class="admin-table-desc">royek senilai Rp 2 triliun akan meningkatkan distribusi BBM di wilayah Sumatera...</p>
+                            </td>
+                            <td><span class="admin-badge info">Proyek</span></td>
+                            <td>Ihsan Zikri</td>
+                            <td>30 Des 2025</td>
+                            <td><span class="admin-badge warning">Pending</span></td>
+                            <td>0</td>
+                            <td>
+                                <button class="admin-action-btn edit" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="admin-action-btn view" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="admin-action-btn approve" title="Approve">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="admin-pagination">
+                <button class="admin-pagination-btn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="admin-pagination-btn active">1</button>
+                <button class="admin-pagination-btn">2</button>
+                <button class="admin-pagination-btn">3</button>
+                <span>...</span>
+                <button class="admin-pagination-btn">10</button>
+                <button class="admin-pagination-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <span class="admin-pagination-info">Menampilkan 1-5 dari 25 konten</span>
+            </div>
+
+            <div class="admin-bulk-actions">
+                <select class="admin-select" id="bulkAction">
+                    <option value="">Pilih Aksi Massal</option>
+                    <option value="publish">Publish Selected</option>
+                    <option value="draft">Move to Draft</option>
+                    <option value="archive">Archive Selected</option>
+                    <option value="delete">Delete Selected</option>
+                </select>
+                <button class="admin-btn secondary" id="applyBulkAction">
+                    <i class="fas fa-play"></i> Terapkan
+                </button>
+                <span class="admin-selected-count">0 item terpilih</span>
+            </div>
+        </main>
+    </div>
+
+    <div class="admin-modal" id="addContentModal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h3>Tambah Konten Baru</h3>
+                <button class="admin-modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="contentForm">
+                    <div class="admin-form-group">
+                        <label for="contentTitle">Judul Konten *</label>
+                        <input type="text" id="contentTitle" class="admin-input" required>
+                    </div>
+                    
+                    <div class="admin-form-row">
+                        <div class="admin-form-group">
+                            <label for="contentCategory">Kategori *</label>
+                            <select id="contentCategory" class="admin-select" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="berita">Berita</option>
+                                <option value="artikel">Artikel</option>
+                                <option value="proyek">Proyek</option>
+                                <option value="pengumuman">Pengumuman</option>
+                            </select>
+                        </div>
+                        
+                        <div class="admin-form-group">
+                            <label for="contentAuthor">Penulis</label>
+                            <input type="text" id="contentAuthor" class="admin-input" value="Admin Seirama">
+                        </div>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contentSummary">Ringkasan</label>
+                        <textarea id="contentSummary" class="admin-textarea" rows="3" placeholder="Ringkasan singkat konten..."></textarea>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contentBody">Isi Konten *</label>
+                        <div class="admin-editor-toolbar">
+                            <button type="button" class="editor-btn"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="editor-btn"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="editor-btn"><i class="fas fa-list-ul"></i></button>
+                            <button type="button" class="editor-btn"><i class="fas fa-link"></i></button>
+                            <button type="button" class="editor-btn"><i class="fas fa-image"></i></button>
+                        </div>
+                        <textarea id="contentBody" class="admin-textarea" rows="10" required placeholder="Tulis isi konten di sini..."></textarea>
+                    </div>
+                    
+                    <div class="admin-form-row">
+                        <div class="admin-form-group">
+                            <label for="contentStatus">Status</label>
+                            <select id="contentStatus" class="admin-select">
+                                <option value="draft">Draft</option>
+                                <option value="pending">Pending Review</option>
+                                <option value="published">Published</option>
+                            </select>
+                        </div>
+                        
+                        <div class="admin-form-group">
+                            <label for="contentDate">Tanggal Publikasi</label>
+                            <input type="datetime-local" id="contentDate" class="admin-input">
+                        </div>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contentTags">Tags (pisahkan dengan koma)</label>
+                        <input type="text" id="contentTags" class="admin-input" placeholder="konstruksi, proyek, bangunan">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contentImage">Gambar Utama</label>
+                        <div class="admin-file-upload">
+                            <input type="file" id="contentImage" accept="image/*" class="admin-input-file">
+                            <label for="contentImage" class="admin-file-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Unggah Gambar</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="admin-modal-footer">
+                <button class="admin-btn light" id="cancelModal">Batal</button>
+                <button class="admin-btn primary" id="saveContent">
+                    <i class="fas fa-save"></i> Simpan Konten
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addContentBtn = document.getElementById('addContentBtn');
+        const addContentModal = document.getElementById('addContentModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelModal = document.getElementById('cancelModal');
+        
+        if (addContentBtn && addContentModal) {
+            addContentBtn.addEventListener('click', function() {
+                addContentModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            const closeModalFunc = function() {
+                addContentModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            };
+            
+            if (closeModal) closeModal.addEventListener('click', closeModalFunc);
+            if (cancelModal) cancelModal.addEventListener('click', closeModalFunc);
+            
+            addContentModal.addEventListener('click', function(e) {
+                if (e.target === addContentModal) {
+                    closeModalFunc();
+                }
+            });
+        }
+        
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const rowCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+        const selectedCount = document.querySelector('.admin-selected-count');
+        
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                rowCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateSelectedCount();
+            });
+        }
+        
+        rowCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateSelectedCount();
+                if (!this.checked && selectAllCheckbox.checked) {
+                    selectAllCheckbox.checked = false;
+                }
+            });
+        });
+        
+        function updateSelectedCount() {
+            const checkedCount = document.querySelectorAll('tbody input[type="checkbox"]:checked').length;
+            if (selectedCount) {
+                selectedCount.textContent = checkedCount + ' item terpilih';
+            }
+        }
+        
+        const actionButtons = document.querySelectorAll('.admin-action-btn');
+        actionButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const contentId = row.cells[1].textContent;
+                const contentTitle = row.cells[2].querySelector('strong').textContent;
+                
+                const action = this.classList.contains('edit') ? 'edit' :
+                              this.classList.contains('delete') ? 'delete' :
+                              this.classList.contains('view') ? 'view' :
+                              this.classList.contains('approve') ? 'approve' :
+                              this.classList.contains('publish') ? 'publish' : '';
+                
+                switch(action) {
+                    case 'edit':
+                        alert('Edit konten: ' + contentTitle);
+                        break;
+                    case 'delete':
+                        if (confirm('Hapus konten "' + contentTitle + '"? Tindakan ini tidak dapat dibatalkan.')) {
+                            alert('Konten ' + contentId + ' dihapus (simulasi)');
+                        }
+                        break;
+                    case 'view':
+                        window.open('../index.html', '_blank');
+                        break;
+                    case 'approve':
+                        if (confirm('Approve konten "' + contentTitle + '"?')) {
+                            alert('Konten disetujui (simulasi)');
+                        }
+                        break;
+                    case 'publish':
+                        if (confirm('Publish konten "' + contentTitle + '"?')) {
+                            alert('Konten dipublish (simulasi)');
+                        }
+                        break;
+                }
+            });
+        });
+        
+        const applyFiltersBtn = document.getElementById('applyFilters');
+        const resetFiltersBtn = document.getElementById('resetFilters');
+        
+        if (applyFiltersBtn) {
+            applyFiltersBtn.addEventListener('click', function() {
+                const category = document.getElementById('filterCategory').value;
+                const status = document.getElementById('filterStatus').value;
+                const date = document.getElementById('filterDate').value;
+                
+                alert('Filter diterapkan:\n' +
+                      'Kategori: ' + (category || 'Semua') + '\n' +
+                      'Status: ' + (status || 'Semua') + '\n' +
+                      'Tanggal: ' + (date || 'Semua'));
+            });
+        }
+        
+        if (resetFiltersBtn) {
+            resetFiltersBtn.addEventListener('click', function() {
+                document.getElementById('filterCategory').value = '';
+                document.getElementById('filterStatus').value = '';
+                document.getElementById('filterDate').value = '';
+                alert('Filter direset');
+            });
+        }
+        
+        const applyBulkActionBtn = document.getElementById('applyBulkAction');
+        if (applyBulkActionBtn) {
+            applyBulkActionBtn.addEventListener('click', function() {
+                const action = document.getElementById('bulkAction').value;
+                const selected = document.querySelectorAll('tbody input[type="checkbox"]:checked').length;
+                
+                if (!action) {
+                    alert('Pilih aksi terlebih dahulu');
+                    return;
+                }
+                
+                if (selected === 0) {
+                    alert('Pilih minimal satu item');
+                    return;
+                }
+                
+                if (confirm('Terapkan aksi "' + action + '" pada ' + selected + ' item?')) {
+                    alert('Aksi ' + action + ' diterapkan pada ' + selected + ' item (simulasi)');
+                }
+            });
+        }
+        
+        const saveContentBtn = document.getElementById('saveContent');
+        if (saveContentBtn) {
+            saveContentBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('contentTitle').value;
+                const category = document.getElementById('contentCategory').value;
+                
+                if (!title || !category) {
+                    alert('Judul dan kategori harus diisi');
+                    return;
+                }
+                
+                alert('Konten "' + title + '" disimpan sebagai ' + category + ' (simulasi)');
+                addContentModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+    });
+    </script>
+</body>
+</html>

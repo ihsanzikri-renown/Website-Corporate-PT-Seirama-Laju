@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan - PT Seirama Laju</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+        .services-hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.8)), 
+                        url('https://cdn.antaranews.com/cache/1200x800/2025/11/30/349d0ebd-869b-4a6a-bdf9-ae01d6b35bdd.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 150px 0 100px;
+            margin-top: 80px;
+            text-align: center;
+        }
+        
+        .services-hero h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            margin: var(--spacing-xl) 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .service-tab {
+            padding: 15px 30px;
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-tab.active {
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+            border-color: var(--primary-yellow);
+        }
+        
+        .service-tab:hover:not(.active) {
+            border-color: var(--primary-yellow);
+            transform: translateY(-2px);
+        }
+        
+        .service-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .service-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .service-detail {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .service-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .service-icon-large {
+            font-size: 4rem;
+            color: var(--primary-yellow);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-yellow);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-yellow);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .service-process {
+            background: var(--light-blue);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: var(--light-gray);
+            z-index: 1;
+        }
+        
+        .process-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin: 0 auto 15px;
+        }
+        
+        .service-projects {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .project-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .project-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .status-completed {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .status-ongoing {
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+        }
+        
+        .status-planning {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-md);
+            font-size: 0.875rem;
+            color: var(--medium-gray);
+        }
+        
+        .technology-stack {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .tech-item {
+            background: var(--white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 150px;
+        }
+        
+        .tech-icon {
+            color: var(--primary-yellow);
+            font-size: 1.5rem;
+        }
+        
+        .service-cta {
+            background: linear-gradient(45deg, var(--dark-blue), #004080);
+            color: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .service-cta h2 {
+            color: var(--white);
+        }
+        
+        .service-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+        }
+        
+        .service-comparison {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .comparison-table th {
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: var(--yellow-pale);
+        }
+        
+        .check-mark {
+            color: #4CAF50;
+        }
+        
+        .certifications-section {
+            background: var(--light-gray);
+            padding: var(--spacing-xl) 0;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .cert-item {
+            text-align: center;
+            padding: var(--spacing-md);
+        }
+        
+        .cert-icon {
+            font-size: 2.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .services-tabs {
+                flex-direction: column;
+            }
+            
+            .service-tab {
+                justify-content: center;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: var(--spacing-xl);
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-grid {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="https://media.licdn.com/dms/image/v2/C560BAQGRDZDkhwv1dQ/company-logo_200_200/company-logo_200_200/0/1640250929590?e=2147483647&v=beta&t=HCbhoBSNAv4QXd1j_9SoJna61ALyrEqVlPUPtibFOtM" height="50">
+                    <span class="logo-text">PT SEIRAMA LAJU</span>
+                </a>
+                
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">Tentang Kami</a></li>
+                        <li class="nav-item"><a href="services.html" class="nav-link active">Layanan</a></li>
+                        <li class="nav-item"><a href="career.html" class="nav-link">Karir</a></li>
+                        <li class="nav-item"><a href="media.html" class="nav-link">Media</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
+                        <li class="nav-item">
+                            <a href="admin/login.html" class="nav-link admin-btn">
+                                <i class="fas fa-user-shield"></i> Admin
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="language-switcher">
+                    <select id="languageSelect">
+                        <option value="id">ID</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="services-hero">
+        <div class="container">
+            <h1>Layanan Kami</h1>
+            <p style="color: white;">Solusi komprehensif untuk infrastruktur energi Indonesia dari hulu hingga hilir</p>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <div class="services-tabs">
+                <button class="service-tab active" data-service="fuel">
+                    <i class="fas fa-gas-pump"></i> Infrastruktur BBM
+                </button>
+                <button class="service-tab" data-service="engineering">
+                    <i class="fas fa-hard-hat"></i> Jasa Teknik & Manajemen
+                </button>
+                <button class="service-tab" data-service="mining">
+                    <i class="fas fa-mountain"></i> Infrastruktur Pertambangan
+                </button>
+            </div>
+
+            <div id="fuel" class="service-content active">
+                <div class="service-detail">
+                    <div class="service-header">
+                        <div class="service-icon-large">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <h2>Infrastruktur BBM</h2>
+                        <p class="section-subtitle">Solusi lengkap untuk penyimpanan, pengolahan, dan distribusi bahan bakar minyak</p>
+                    </div>
+                    
+                    <div class="service-description">
+                        <p>Kami menyediakan layanan end-to-end untuk infrastruktur BBM, mulai dari perencanaan, desain, konstruksi, hingga maintenance. Dengan pengalaman lebih dari 15 tahun, kami telah menyelesaikan berbagai proyek strategis di seluruh Indonesia, mendukung ketahanan energi nasional.</p>
+                    </div>
+                    
+                    <div class="service-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-oil-can"></i>
+                            </div>
+                            <h3>Terminal BBM</h3>
+                            <p>Desain dan konstruksi terminal BBM dengan kapasitas hingga 500.000 KL, dilengkapi sistem keamanan dan monitoring terintegrasi.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3>Depot & Stasiun Pengisian</h3>
+                            <p>Pengembangan depot dan SPBU dengan sistem distribusi yang efisien, termasuk sistem manajemen inventori real-time.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-pipe"></i>
+                            </div>
+                            <h3>Pipa Distribusi</h3>
+                            <p>Instalasi jaringan pipa BBM untuk distribusi jarak jauh, dengan teknologi anti-korosi dan sistem deteksi kebocoran.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Sistem Keamanan</h3>
+                            <p>Implementasi sistem keamanan dan pencegahan kebocoran dengan teknologi terkini untuk menjamin operasi yang aman.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-process">
+                        <h3>Proses Implementasi</h3>
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h4>Studi Kelayakan</h4>
+                                <p>Analisis teknis dan finansial untuk menentukan kelayakan proyek</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h4>Desain Engineering</h4>
+                                <p>Perancangan detail dengan standar internasional</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h4>Konstruksi</h4>
+                                <p>Pelaksanaan konstruksi dengan pengawasan ketat</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <h4>Commissioning</h4>
+                                <p>Pengujian sistem dan penyerahan proyek</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">5</div>
+                                <h4>Maintenance</h4>
+                                <p>Layanan purna jual dan maintenance berkala</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-projects">
+                        <h3>Proyek Terkini</h3>
+                        <div class="projects-grid">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="images/services/fuel-project1.jpg" alt="Terminal BBM Jakarta">
+                                </div>
+                                <div class="project-content">
+                                    <span class="project-status status-completed">Selesai</span>
+                                    <h4>Terminal BBM Jakarta</h4>
+                                    <p>Modernisasi terminal dengan kapasitas 500.000 KL dan sistem otomatisasi terbaru.</p>
+                                    <div class="project-meta">
+                                        <span><i class="far fa-calendar"></i> 2023</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Jakarta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="images/services/fuel-project2.jpg" alt="Depot BBM Surabaya">
+                                </div>
+                                <div class="project-content">
+                                    <span class="project-status status-ongoing">Berlangsung</span>
+                                    <h4>Depot BBM Surabaya</h4>
+                                    <p>Pembangunan depot baru dengan sistem otomatisasi dan kapasitas 200.000 KL.</p>
+                                    <div class="project-meta">
+                                        <span><i class="far fa-calendar"></i> 2023-2024</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Surabaya</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="images/services/fuel-project3.jpg" alt="Jaringan Pipa BBM Sumatra">
+                                </div>
+                                <div class="project-content">
+                                    <span class="project-status status-planning">Perencanaan</span>
+                                    <h4>Jaringan Pipa BBM Sumatra</h4>
+                                    <p>Instalasi pipa sepanjang 50 km untuk distribusi BBM di wilayah Sumatra.</p>
+                                    <div class="project-meta">
+                                        <span><i class="far fa-calendar"></i> 2024</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Sumatra</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="technology-stack">
+                        <h3>Teknologi yang Digunakan</h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h4>Automation System</h4>
+                                    <p>Sistem otomatisasi SCADA</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-satellite-dish"></i>
+                                </div>
+                                <div>
+                                    <h4>Monitoring</h4>
+                                    <p>Real-time monitoring system</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Safety System</h4>
+                                    <p>Sistem keamanan berlapis</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div>
+                                    <h4>Eco-Friendly</h4>
+                                    <p>Teknologi ramah lingkungan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engineering Services -->
+            <div id="engineering" class="service-content">
+                <div class="service-detail">
+                    <div class="service-header">
+                        <div class="service-icon-large">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h2>Jasa Teknik & Manajemen</h2>
+                        <p class="section-subtitle">Konsultasi engineering dan project management untuk proyek infrastruktur skala besar</p>
+                    </div>
+                    
+                    <div class="service-description">
+                        <p>Tim ahli kami menyediakan layanan konsultasi teknik dan manajemen proyek yang komprehensif, memastikan setiap proyek berjalan sesuai rencana, budget, dan standar kualitas tertinggi. Kami mengikuti metodologi PMI dan standar internasional dalam setiap tahapan proyek.</p>
+                    </div>
+                    
+                    <div class="service-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-drafting-compass"></i>
+                            </div>
+                            <h3>Desain & Engineering</h3>
+                            <p>Perancangan detail engineering untuk proyek infrastruktur dengan menggunakan software terkini seperti AutoCAD, Revit, dan SAP2000.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3>Project Management</h3>
+                            <p>Manajemen proyek end-to-end dengan metodologi PMI, termasuk pengelolaan risiko, waktu, dan anggaran.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Studi Kelayakan</h3>
+                            <p>Analisis kelayakan teknis dan finansial proyek dengan pendekatan komprehensif dan data-driven.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h3>Quality Assurance</h3>
+                            <p>Pemantauan dan jaminan kualitas selama konstruksi dengan standar ISO 9001:2015.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-comparison">
+                        <h3>Ruang Lingkup Layanan</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Layanan</th>
+                                    <th>Deskripsi</th>
+                                    <th>Deliverables</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Feasibility Study</td>
+                                    <td>Analisis kelayakan proyek secara teknis, finansial, dan lingkungan</td>
+                                    <td>Laporan studi kelayakan lengkap</td>
+                                </tr>
+                                <tr>
+                                    <td>Basic Engineering Design</td>
+                                    <td>Perancangan dasar sesuai standar industri</td>
+                                    <td>Dokumen BED & spesifikasi teknis</td>
+                                </tr>
+                                <tr>
+                                    <td>Detailed Engineering Design</td>
+                                    <td>Perancangan detail untuk konstruksi</td>
+                                    <td>Shop drawings & konstruksi drawings</td>
+                                </tr>
+                                <tr>
+                                    <td>Project Management</td>
+                                    <td>Manajemen proyek dari awal hingga akhir</td>
+                                    <td>Laporan progress & dokumentasi proyek</td>
+                                </tr>
+                                <tr>
+                                    <td>Construction Supervision</td>
+                                    <td>Pengawasan konstruksi di lapangan</td>
+                                    <td>Quality control reports</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="certifications-section">
+                        <h3>Sertifikasi & Kompetensi</h3>
+                        <div class="certs-grid">
+                            <div class="cert-item">
+                                <div class="cert-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h4>ISO 9001:2015</h4>
+                                <p>Sistem Manajemen Mutu</p>
+                            </div>
+                            
+                            <div class="cert-item">
+                                <div class="cert-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h4>PMP Certified</h4>
+                                <p>Project Management Professional</p>
+                            </div>
+                            
+                            <div class="cert-item">
+                                <div class="cert-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h4>ISO 14001:2015</h4>
+                                <p>Sistem Manajemen Lingkungan</p>
+                            </div>
+                            
+                            <div class="cert-item">
+                                <div class="cert-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h4>Konsultan Teknik Berizin</h4>
+                                <p>Klasifikasi Utama</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mining" class="service-content">
+                <div class="service-detail">
+                    <div class="service-header">
+                        <div class="service-icon-large">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h2>Infrastruktur Pertambangan</h2>
+                        <p class="section-subtitle">Pengembangan infrastruktur pendukung untuk operasi pertambangan yang efisien dan berkelanjutan</p>
+                    </div>
+                    
+                    <div class="service-description">
+                        <p>Kami mengkhususkan diri dalam pembangunan infrastruktur pertambangan yang aman, efisien, dan berkelanjutan, mendukung operasi pertambangan dari eksplorasi hingga produksi. Dengan mempertimbangkan aspek lingkungan dan keselamatan, kami membantu klien mencapai produktivitas maksimal.</p>
+                    </div>
+                    
+                    <div class="service-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-road"></i>
+                            </div>
+                            <h3>Jalan Hauling</h3>
+                            <p>Konstruksi jalan tambang yang kokoh untuk transportasi berat dengan material berkualitas tinggi.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <h3>Fasilitas Pendukung</h4>
+                            <p>Pembangunan workshop, kantor, mess karyawan, dan fasilitas pendukung operasi tambang.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-recycle"></i>
+                            </div>
+                            <h3>Sistem Pengolahan</h3>
+                            <p>Instalasi sistem pengolahan mineral dan air tambang dengan teknologi ramah lingkungan.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <h3>Energi Tambang</h3>
+                            <p>Penyediaan sumber energi untuk operasi tambang, termasuk solar panel dan genset.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-projects">
+                        <h3>Proyek Pertambangan</h3>
+                        <div class="projects-grid">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="images/services/mining-project1.jpg" alt="Tambang Batubara Kalimantan">
+                                </div>
+                                <div class="project-content">
+                                    <span class="project-status status-completed">Selesai</span>
+                                    <h4>Infrastruktur Tambang Batubara Kalimantan</h4>
+                                    <p>Pengembangan jalan hauling 20 km dan fasilitas pendukung untuk operasi tambang skala besar.</p>
+                                    <div class="project-meta">
+                                        <span><i class="far fa-calendar"></i> 2022</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Kalimantan Timur</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="images/services/mining-project2.jpg" alt="Pabrik Pengolahan Nikel">
+                                </div>
+                                <div class="project-content">
+                                    <span class="project-status status-ongoing">Berlangsung</span>
+                                    <h4>Fasilitas Pengolahan Nikel Sulawesi</h4>
+                                    <p>Konstruksi pabrik pengolahan nikel dengan teknologi terbaru dan sistem pengolahan limbah.</p>
+                                    <div class="project-meta">
+                                        <span><i class="far fa-calendar"></i> 2023-2024</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Sulawesi Tengah</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="images/services/mining-project3.jpg" alt="Sistem Energi Tambang">
+                                </div>
+                                <div class="project-content">
+                                    <span class="project-status status-completed">Selesai</span>
+                                    <h4>Sistem Energi Tambang Emas Papua</h4>
+                                    <p>Instalasi pembangkit listrik hybrid 10 MW untuk operasi tambang emas di daerah terpencil.</p>
+                                    <div class="project-meta">
+                                        <span><i class="far fa-calendar"></i> 2021</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> Papua</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="technology-stack">
+                        <h3>Fokus Keberlanjutan</h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div>
+                                    <h4>Revegetasi</h4>
+                                    <p>Program revegetasi pasca tambang</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div>
+                                    <h4>Water Management</h4>
+                                    <p>Sistem pengelolaan air tambang</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-recycle"></i>
+                                </div>
+                                <div>
+                                    <h4>Waste Treatment</h4>
+                                    <p>Pengolahan limbah tambang</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-solar-panel"></i>
+                                </div>
+                                <div>
+                                    <h4>Renewable Energy</h4>
+                                    <p>Pemanfaatan energi terbarukan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-cta">
+                <h2>Butuh Konsultasi Proyek?</h2>
+                <p>Tim ahli kami siap membantu mewujudkan proyek infrastruktur Anda. Konsultasikan kebutuhan Anda sekarang.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-phone-alt"></i> Konsultasi Gratis
+                    </a>
+                    <a href="media.html#reports" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Download Company Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="https://media.licdn.com/dms/image/v2/C560BAQGRDZDkhwv1dQ/company-logo_200_200/company-logo_200_200/0/1640250929590?e=2147483647&v=beta&t=HCbhoBSNAv4QXd1j_9SoJna61ALyrEqVlPUPtibFOtM" alt="PT Seirama Laju" height="40">
+                    </div>
+                    <p class="footer-about">
+                        Perusahaan terdepan dalam pembangunan infrastruktur energi Indonesia, berkomitmen pada kualitas, inovasi, dan keberlanjutan.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                        <li><a href="services.html">Layanan</a></li>
+                        <li><a href="career.html">Karir</a></li>
+                        <li><a href="media.html">Media & Informasi</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Kontak Kami</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jl. Sudirman No. 123, Jakarta Pusat 10220</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(021) 1234-5678</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@seiramalaju.co.id</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Senin - Jumat: 08:00 - 17:00</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Berlangganan untuk mendapatkan update terbaru dari kami.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email Anda" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2025 PT Seirama Laju. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.service-tab');
+            const contents = document.querySelectorAll('.service-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const serviceId = tab.getAttribute('data-service');
+                    
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === serviceId) {
+                            content.classList.add('active');
+                        }
+                    });
+                    
+                    if (window.innerWidth < 768) {
+                        const serviceContent = document.getElementById(serviceId);
+                        serviceContent.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            const featureCards = document.querySelectorAll('.feature-card');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            projectCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            const techItems = document.querySelectorAll('.tech-item');
+            techItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                const techObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateX(0)';
+                            }, index * 100);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                techObserver.observe(item);
+            });
+            
+            const processSteps = document.querySelectorAll('.process-step');
+            const processObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'scale(1)';
+                        }, index * 200);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            processSteps.forEach(step => {
+                step.style.opacity = '0';
+                step.style.transform = 'scale(0.8)';
+                step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                processObserver.observe(step);
+            });
+            
+            const tableRows = document.querySelectorAll('.comparison-table tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.style.backgroundColor = 'var(--yellow-pale)';
+                    row.style.transition = 'background-color 0.3s ease';
+                });
+                
+                row.addEventListener('mouseleave', () => {
+                    row.style.backgroundColor = '';
+                });
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

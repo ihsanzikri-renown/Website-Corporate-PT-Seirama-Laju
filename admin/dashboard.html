@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - PT Seirama Laju</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-sidebar-header">
+                <div class="admin-logo">
+                <img src="https://media.licdn.com/dms/image/v2/C560BAQGRDZDkhwv1dQ/company-logo_200_200/company-logo_200_200/0/1640250929590?e=2147483647&v=beta&t=HCbhoBSNAv4QXd1j_9SoJna61ALyrEqVlPUPtibFOtM" alt="PT Seirama Laju" height="40">
+                <p style="color: white;">PT Seirama Laju</p>
+            </div>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="dashboard.html" class="admin-nav-item active">
+                    <i class="admin-nav-icon fas fa-tachometer-alt"></i>
+                    <span class="admin-nav-text">Dashboard</span>
+                </a>
+                
+                <a href="content.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-newspaper"></i>
+                    <span class="admin-nav-text">Kelola Konten</span>
+                    <span class="admin-nav-badge">3</span>
+                </a>
+                
+                <a href="jobs.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-briefcase"></i>
+                    <span class="admin-nav-text">Lowongan Kerja</span>
+                    <span class="admin-nav-badge">12</span>
+                </a>
+                            
+            <div class="admin-sidebar-footer">
+                <a href="../index.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-globe"></i>
+                    <span class="admin-nav-text">Lihat Website</span>
+                </a>
+                
+                <a href="logout.html" class="admin-nav-item">
+                    <i class="admin-nav-icon fas fa-sign-out-alt"></i>
+                    <span class="admin-nav-text">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <h1>Dashboard Admin</h1>
+                    <p>Selamat datang, Admin Seirama Laju</p>
+                </div>
+                
+                <div class="admin-header-right">
+                    <div class="admin-search">
+                        <input type="text" placeholder="Cari sesuatu...">
+                        <i class="admin-search-icon fas fa-search"></i>
+                    </div>
+                    
+                    <div class="admin-notifications">
+                        <button class="admin-notification-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="admin-notification-count">3</span>
+                        </button>
+                    </div>
+                    
+                    <div class="admin-user-menu">
+                        <img src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg" alt="User" class="admin-user-avatar">
+                        <span>Admin Seirama</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-stats-grid">
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon primary">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="admin-stat-value">12,458</div>
+                    <div class="admin-stat-label">Total Pengunjung</div>
+                    <div class="admin-stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>12% dari bulan lalu</span>
+                    </div>
+                </div>
+                
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon success">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="admin-stat-value">45</div>
+                    <div class="admin-stat-label">Pelamar Baru</div>
+                    <div class="admin-stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>8% dari minggu lalu</span>
+                    </div>
+                </div>
+                
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon warning">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="admin-stat-value">8</div>
+                    <div class="admin-stat-label">Kontak Belum Dibaca</div>
+                    <div class="admin-stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>2 dari kemarin</span>
+                    </div>
+                </div>
+                
+                <div class="admin-stat-card">
+                    <div class="admin-stat-icon info">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="admin-stat-value">3</div>
+                    <div class="admin-stat-label">Artikel Menunggu Review</div>
+                    <div class="admin-stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>1 baru hari ini</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="overview">Overview</button>
+                    <button class="admin-tab" data-tab="analytics">Analytics</button>
+                    <button class="admin-tab" data-tab="recent">Aktivitas Terbaru</button>
+                </div>
+
+                <div id="overview" class="admin-tab-content active">
+                    <div class="admin-cards-grid">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3 class="admin-card-title">Lowongan Paling Populer</h3>
+                            </div>
+                            <div class="admin-card-body">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="padding: 10px 0; border-bottom: 1px solid var(--admin-border);">
+                                        <strong>Site Engineer</strong>
+                                        <span class="admin-badge success float-right">45 aplikasi</span>
+                                    </li>
+                                    <li style="padding: 10px 0; border-bottom: 1px solid var(--admin-border);">
+                                        <strong>Project Manager</strong>
+                                        <span class="admin-badge warning float-right">28 aplikasi</span>
+                                    </li>
+                                    <li style="padding: 10px 0; border-bottom: 1px solid var(--admin-border);">
+                                        <strong>HR Officer</strong>
+                                        <span class="admin-badge info float-right">15 aplikasi</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3 class="admin-card-title">Statistik Pengunjung</h3>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="admin-chart-container">
+                                    <div style="text-align: center; padding: 50px;">
+                                        <i class="fas fa-chart-bar" style="font-size: 3rem; color: var(--admin-border);"></i>
+                                        <p style="color: var(--admin-text-light);">Chart Visualization</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="recent" class="admin-tab-content">
+                    <div class="admin-activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Budi Santoso</strong> melamar untuk posisi Site Engineer</p>
+                                <span class="activity-time">5 menit yang lalu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon info">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Sarah Wijaya</strong> mengirim pesan melalui form kontak</p>
+                                <span class="activity-time">1 jam yang lalu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Marketing Team</strong> mengajukan artikel baru untuk review</p>
+                                <span class="activity-time">2 jam yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

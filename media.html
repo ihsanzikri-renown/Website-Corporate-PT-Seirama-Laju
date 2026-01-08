@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Informasi - PT Seirama Laju</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+        .media-tabs {
+            display: flex;
+            justify-content: center;
+            margin: var(--spacing-xl) 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .media-tab {
+            padding: 12px 24px;
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .media-tab.active {
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+            border-color: var(--primary-yellow);
+        }
+        
+        .media-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .media-content.active {
+            display: block;
+        }
+        
+        .news-archive {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .news-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-item:hover .news-image img {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: var(--spacing-md);
+        }
+        
+        .news-category {
+            display: inline-block;
+            background: var(--yellow-pale);
+            color: var(--dark-blue);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-date {
+            color: var(--medium-gray);
+            font-size: 0.875rem;
+            margin: 10px 0;
+        }
+        
+        .press-releases {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .press-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .press-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-yellow);
+        }
+        
+        .press-download {
+            margin-top: var(--spacing-md);
+        }
+        
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-download:hover {
+            background: var(--yellow-dark);
+        }
+        
+        .gallery-section {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            height: 250px;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            padding: var(--spacing-sm);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .reports-section {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .reports-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .report-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+        }
+        
+        .report-icon {
+            color: var(--primary-yellow);
+            font-size: 2rem;
+            min-width: 50px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .page-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--light-gray);
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link.active {
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+        }
+        
+        .page-link:hover:not(.active) {
+            background: var(--medium-gray);
+            color: var(--white);
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+        
+        .lightbox-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-nav button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .subscribe-section {
+            background: linear-gradient(45deg, var(--dark-blue), #004080);
+            color: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .subscribe-section h2 {
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="https://media.licdn.com/dms/image/v2/C560BAQGRDZDkhwv1dQ/company-logo_200_200/company-logo_200_200/0/1640250929590?e=2147483647&v=beta&t=HCbhoBSNAv4QXd1j_9SoJna61ALyrEqVlPUPtibFOtM" height="50">
+                    <span class="logo-text">PT SEIRAMA LAJU</span>
+                </a>
+                
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">Tentang Kami</a></li>
+                        <li class="nav-item"><a href="services.html" class="nav-link">Layanan</a></li>
+                        <li class="nav-item"><a href="career.html" class="nav-link">Karir</a></li>
+                        <li class="nav-item"><a href="media.html" class="nav-link active">Media</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
+                        <li class="nav-item">
+                            <a href="admin/login.html" class="nav-link admin-btn">
+                                <i class="fas fa-user-shield"></i> Admin
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="language-switcher">
+                    <select id="languageSelect">
+                        <option value="id">ID</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Media & Informasi</h1>
+            <p>Update terbaru, publikasi, dan informasi seputar PT Seirama Laju</p>
+        </div>
+    </section>
+
+    <section class="media-content-section">
+        <div class="container">
+            <div class="media-tabs">
+                <button class="media-tab active" data-tab="news">
+                    <i class="fas fa-newspaper"></i> Berita
+                </button>
+                <button class="media-tab" data-tab="press">
+                    <i class="fas fa-bullhorn"></i> Siaran Pers
+                </button>
+                <button class="media-tab" data-tab="gallery">
+                    <i class="fas fa-images"></i> Galeri
+                </button>
+                <button class="media-tab" data-tab="reports">
+                    <i class="fas fa-file-alt"></i> Laporan
+                </button>
+            </div>
+
+            <div id="news" class="media-content active">
+                <div class="section-header">
+                    <h2 class="section-title">Berita Terbaru</h2>
+                    <p class="section-subtitle">Update aktivitas dan pencapaian perusahaan</p>
+                </div>
+                
+                <div class="news-archive">
+                    <article class="news-item">
+                        <div class="news-image">
+                            <img src="https://foto.kontan.co.id/ULXDrCIslvUWgCVA59Mgr_2aQ2o=/smart/2024/12/24/1752048138p.jpg" alt="Penghargaan Industri">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">Pencapaian</span>
+                            <h3>PT Seirama Laju Raih Penghargaan Industri Terbaik 2024</h3>
+                            <p class="news-date">25 Desember 2024</p>
+                            <p>Perusahaan meraih penghargaan untuk inovasi dalam proyek infrastruktur energi berkelanjutan.</p>
+                            <a href="#" class="news-link">Baca Selengkapnya →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-image">
+                            <img src="https://foto.kontan.co.id/3TdG8xkV5-u4XHgaCoV3LDmXGdE=/smart/2024/11/08/772855662p.jpg" alt="Proyek Baru">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">Proyek</span>
+                            <h3>Dimulainya Proyek Terminal BBM Strategis di Sumatra</h3>
+                            <p class="news-date">15 Desember 2024</p>
+                            <p>Proyek senilai Rp 2 triliun akan meningkatkan distribusi BBM di wilayah Sumatra.</p>
+                            <a href="#" class="news-link">Baca Selengkapnya →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-image">
+                            <img src="https://img.antarafoto.com/cache/400x300/2025/10/14/program-sekolah-negeri-terapung-di-daerah-3t-kaltim-1kpld-dom.jpg" alt="CSR">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">CSR</span>
+                            <h3>Program CSR Pendidikan di Daerah 3T</h3>
+                            <p class="news-date">10 Desember 2024</p>
+                            <p>PT Seirama Laju membangun 5 sekolah dasar di daerah tertinggal, terdepan, dan terluar.</p>
+                            <a href="#" class="news-link">Baca Selengkapnya →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiKfcigQBgZAHicwjQ1Wto-dX5456w9Av_Rw&s" alt="Kerjasama">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">Kerjasama</span>
+                            <h3>Kerjasama dengan Universitas untuk Riset Energi Terbarukan</h3>
+                            <p class="news-date">5 Desember 2024</p>
+                            <p>Kolaborasi dengan 3 universitas ternama untuk pengembangan teknologi energi terbarukan.</p>
+                            <a href="#" class="news-link">Baca Selengkapnya →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-image">
+                            <img src="https://www.waspada.id/wp-content/uploads/2024/09/IMG-20240906-WA0018-700x400.jpg" alt="Sertifikasi">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">Sertifikasi</span>
+                            <h3>Perusahaan Raih Sertifikasi ISO 45001:2018</h3>
+                            <p class="news-date">30 November 2024</p>
+                            <p>Penghargaan untuk sistem manajemen keselamatan dan kesehatan kerja yang komprehensif.</p>
+                            <a href="#" class="news-link">Baca Selengkapnya →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-image">
+                            <img src="https://cdn01.metrotvnews.com/dynamic/content/2025/10/10/kpLCaeW5/a_68e8ab5987a4d.jpg?w=720" alt="Ekspor">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">Bisnis</span>
+                            <h3>Ekspansi Bisnis ke Pasar Asia Tenggara</h3>
+                            <p class="news-date">25 November 2024</p>
+                            <p>PT Seirama Laju memenangkan tender proyek infrastruktur energi di Vietnam dan Filipina.</p>
+                            <a href="#" class="news-link">Baca Selengkapnya →</a>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="pagination">
+                    <a href="#" class="page-link active">1</a>
+                    <a href="#" class="page-link">2</a>
+                    <a href="#" class="page-link">3</a>
+                    <a href="#" class="page-link">4</a>
+                    <a href="#" class="page-link">5</a>
+                    <a href="#" class="page-link">Next →</a>
+                </div>
+            </div>
+
+            <div id="press" class="media-content">
+                <div class="section-header">
+                    <h2 class="section-title">Siaran Pers</h2>
+                    <p class="section-subtitle">Pengumuman resmi dari perusahaan</p>
+                </div>
+                
+                <div class="press-releases">
+                    <div class="press-list">
+                        <div class="press-item">
+                            <h3>Pengumuman Hasil Keuangan Tahunan 2024</h3>
+                            <p class="news-date">20 Desember 2024</p>
+                            <p>PT Seirama Laju mengumumkan kinerja keuangan yang solid dengan pertumbuhan pendapatan 15% YoY.</p>
+                            <div class="press-download">
+                                <a href="#" class="btn-download">
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="press-item">
+                            <h3>Penandatanganan Kerjasama dengan Pemerintah Daerah</h3>
+                            <p class="news-date">10 Desember 2024</p>
+                            <p>Kerjasama strategis untuk pengembangan infrastruktur energi di 5 provinsi di Indonesia Timur.</p>
+                            <div class="press-download">
+                                <a href="#" class="btn-download">
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="press-item">
+                            <h3>Peluncuran Program Sustainability 2025-2030</h3>
+                            <p class="news-date">1 Desember 2024</p>
+                            <p>Rencana komprehensif untuk mengurangi emisi karbon dan meningkatkan kontribusi sosial.</p>
+                            <div class="press-download">
+                                <a href="#" class="btn-download">
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="press-item">
+                            <h3>Penunjukan Direktur Utama Baru</h3>
+                            <p class="news-date">15 November 2024</p>
+                            <p>Pengumuman resmi penunjukan Budi Santoso sebagai Direktur Utama PT Seirama Laju.</p>
+                            <div class="press-download">
+                                <a href="#" class="btn-download">
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gallery" class="media-content">
+                <div class="section-header">
+                    <h2 class="section-title">Galeri Proyek</h2>
+                    <p class="section-subtitle">Visualisasi keberhasilan dan kegiatan perusahaan</p>
+                </div>
+                
+                <div class="gallery-section">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-image="1">
+                            <img src="https://cdn.medcom.id/dynamic/content/2024/03/21/1667296/wD9yk7omHf.jpeg?w=700" alt="Terminal BBM Jakarta">
+                            <div class="gallery-overlay">
+                                <h4>Terminal BBM Jakarta</h4>
+                                <p>Modernisasi terminal dengan kapasitas 500.000 KL</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="2">
+                            <img src="https://web.pln.co.id/statics/uploads/2020/02/PLN-_PLTU-Jawa-8-cuk.jpeg" alt="PLTU Jawa Tengah">
+                            <div class="gallery-overlay">
+                                <h4>PLTU Jawa Tengah</h4>
+                                <p>Konstruksi pembangkit listrik tenaga uap</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="3">
+                            <img src="https://space-kd.sgp1.cdn.digitaloceanspaces.com/pusaranmedia/lg/news-lg-1602740820.png" alt="Infrastruktur Pertambangan">
+                            <div class="gallery-overlay">
+                                <h4>Infrastruktur Pertambangan</h4>
+                                <p>Pengembangan jalan hauling dan fasilitas pendukung</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="4">
+                            <img src="https://img.antarafoto.com/cache/400x300/2025/10/14/program-sekolah-negeri-terapung-di-daerah-3t-kaltim-1kpld-dom.jpg" alt="Program CSR">
+                            <div class="gallery-overlay">
+                                <h4>Program CSR Pendidikan</h4>
+                                <p>Pembangunan sekolah di daerah 3T</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="5">
+                            <img src="https://connect-assets.prosple.com/cdn/ff/B1IcatPrq50GxR-kfhZ81d19y5MRfA8LJk0sbtv7l18/1652265049/public/inline-images/46428122_xl.jpg" alt="Tim Perusahaan">
+                            <div class="gallery-overlay">
+                                <h4>Tim Engineering</h4>
+                                <p>Para ahli di bidang infrastruktur energi</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="6">
+                            <img src="https://foto.kontan.co.id/ULXDrCIslvUWgCVA59Mgr_2aQ2o=/smart/2024/12/24/1752048138p.jpg" alt="Penghargaan">
+                            <div class="gallery-overlay">
+                                <h4>Momen Penghargaan</h4>
+                                <p>Penghargaan Industri Terbaik 2024</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="7">
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/11/2024/01/01/IMG-20231231-WA0006-1823880008.jpg" alt="Konstruksi">
+                            <div class="gallery-overlay">
+                                <h4>Proses Konstruksi</h4>
+                                <p>Aktivitas di site project</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item" data-image="8">
+                            <img src="https://images.bisnis.com/posts/2020/10/18/1306594/direksi-pertamina.jpg" alt="Meeting">
+                            <div class="gallery-overlay">
+                                <h4>Rapat Kerjasama</h4>
+                                <p>Diskusi dengan mitra strategis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reports" class="media-content">
+                <div class="section-header">
+                    <h2 class="section-title">Laporan & Publikasi</h2>
+                    <p class="section-subtitle">Dokumen resmi dan publikasi perusahaan</p>
+                </div>
+                
+                <div class="reports-section">
+                    <div class="reports-list">
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3>Laporan Tahunan 2024</h3>
+                                <p class="news-date">Maret 2024</p>
+                                <p>Laporan kinerja keuangan dan operasional perusahaan tahun 2024</p>
+                                <a href="#" class="btn-download">Download</a>
+                            </div>
+                        </div>
+                        
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3>Sustainability Report 2024</h3>
+                                <p class="news-date">April 2024</p>
+                                <p>Laporan keberlanjutan dan tanggung jawab sosial perusahaan</p>
+                                <a href="#" class="btn-download">Download</a>
+                            </div>
+                        </div>
+                        
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3>Prospektus Perusahaan</h3>
+                                <p class="news-date">Januari 2024</p>
+                                <p>Profil perusahaan dan rencana bisnis jangka menengah</p>
+                                <a href="#" class="btn-download">Download</a>
+                            </div>
+                        </div>
+                        
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3>Company Profile 2024</h3>
+                                <p class="news-date">Februari 2024</p>
+                                <p>Profil lengkap perusahaan, layanan, dan portofolio proyek</p>
+                                <a href="#" class="btn-download">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="subscribe-section">
+        <div class="container">
+            <h2>Dapatkan Update Terbaru</h2>
+            <p>Berlangganan newsletter kami untuk mendapatkan informasi terbaru seputar perusahaan</p>
+            <form class="newsletter-form" style="max-width: 500px; margin: 30px auto;">
+                <input type="email" placeholder="Email Anda" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img class="lightbox-img" id="lightboxImage" src="" alt="">
+            <div class="lightbox-nav">
+                <button onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="https://media.licdn.com/dms/image/v2/C560BAQGRDZDkhwv1dQ/company-logo_200_200/company-logo_200_200/0/1640250929590?e=2147483647&v=beta&t=HCbhoBSNAv4QXd1j_9SoJna61ALyrEqVlPUPtibFOtM" alt="PT Seirama Laju" height="40">
+                    </div>
+                    <p class="footer-about">
+                        Perusahaan terdepan dalam pembangunan infrastruktur energi Indonesia, berkomitmen pada kualitas, inovasi, dan keberlanjutan.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                        <li><a href="services.html">Layanan</a></li>
+                        <li><a href="career.html">Karir</a></li>
+                        <li><a href="media.html">Media & Informasi</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Kontak Kami</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jl. Sudirman No. 123, Jakarta Pusat 10220</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(021) 1234-5678</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@seiramalaju.co.id</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Senin - Jumat: 08:00 - 17:00</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Berlangganan untuk mendapatkan update terbaru dari kami.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email Anda" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2025 PT Seirama Laju. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.media-tab');
+            const contents = document.querySelectorAll('.media-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            
+            let currentImageIndex = 0;
+            const images = Array.from(galleryItems).map(item => ({
+                src: item.querySelector('img').src,
+                alt: item.querySelector('img').alt
+            }));
+            
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    openLightbox();
+                });
+            });
+            
+            window.openLightbox = function() {
+                lightbox.classList.add('active');
+                updateLightboxImage();
+                document.body.style.overflow = 'hidden';
+            };
+            
+            window.closeLightbox = function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            };
+            
+            window.prevImage = function() {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateLightboxImage();
+            };
+            
+            window.nextImage = function() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateLightboxImage();
+            };
+            
+            function updateLightboxImage() {
+                lightboxImage.src = images[currentImageIndex].src;
+                lightboxImage.alt = images[currentImageIndex].alt;
+            }
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+                if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+                    prevImage();
+                }
+                if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+                    nextImage();
+                }
+            });
+            
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            const pageLinks = document.querySelectorAll('.page-link');
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    pageLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

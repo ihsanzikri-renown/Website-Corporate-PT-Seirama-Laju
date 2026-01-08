@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - Admin PT Seirama Laju</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .logout-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            padding: 20px;
+        }
+        
+        .logout-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logout-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .logout-title {
+            color: #1a2980;
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .logout-message {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .logout-countdown {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .countdown-number {
+            font-weight: bold;
+            color: #1a2980;
+            font-size: 18px;
+        }
+        
+        .logout-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn-logout-confirm {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-logout-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 41, 128, 0.3);
+        }
+        
+        .btn-logout-cancel {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #ddd;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-logout-cancel:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .logout-security-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .security-title {
+            color: #856404;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .security-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .security-list li {
+            padding: 5px 0;
+            color: #856404;
+            font-size: 14px;
+        }
+        
+        .logout-loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1a2980;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes redirectProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        .redirect-progress {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .redirect-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            animation: redirectProgress 5s linear;
+        }
+        
+        @media (max-width: 576px) {
+            .logout-card {
+                padding: 30px 20px;
+            }
+            
+            .logout-actions {
+                flex-direction: column;
+            }
+            
+            .btn-logout-confirm,
+            .btn-logout-cancel {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <div class="logout-card">
+            <div class="logout-icon">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            
+            <h1 class="logout-title">Konfirmasi Logout</h1>
+            
+            <p class="logout-message">
+                Anda yakin ingin keluar dari Admin Panel PT Seirama Laju?<br>
+                Semua perubahan yang belum disimpan akan hilang.
+            </p>
+            
+            <div class="logout-countdown">
+                <p>Anda akan otomatis dialihkan ke halaman login dalam <span id="countdown" class="countdown-number">10</span> detik</p>
+            </div>
+            
+            <div class="logout-security-info">
+                <div class="security-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Tips Keamanan
+                </div>
+                <ul class="security-list">
+                    <li>✓ Pastikan Anda logout setelah selesai menggunakan admin panel</li>
+                    <li>✓ Jangan biarkan sesi admin terbuka di komputer publik</li>
+                    <li>✓ Hapus cache browser jika menggunakan komputer bersama</li>
+                </ul>
+            </div>
+            
+            <div class="logout-actions">
+                <button class="btn-logout-cancel" id="cancelLogout">
+                    <i class="fas fa-times"></i> Batalkan
+                </button>
+                <button class="btn-logout-confirm" id="confirmLogout">
+                    <i class="fas fa-sign-out-alt"></i> Ya, Logout Sekarang
+                </button>
+            </div>
+            
+            <div class="redirect-progress">
+                <div class="redirect-progress-bar" id="progressBar"></div>
+            </div>
+            
+            <p style="margin-top: 20px; color: #999; font-size: 14px;">
+                <i class="fas fa-info-circle"></i> Login kembali? 
+                <a href="login.html" style="color: #1a2980; text-decoration: none; font-weight: 500;">
+                    Klik di sini
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let countdown = 10;
+        let countdownInterval;
+        let isLoggingOut = false;
+        
+        const countdownElement = document.getElementById('countdown');
+        const progressBar = document.getElementById('progressBar');
+        const confirmLogoutBtn = document.getElementById('confirmLogout');
+        const cancelLogoutBtn = document.getElementById('cancelLogout');
+        
+        function startAutoLogout() {
+            countdownInterval = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    performLogout();
+                }
+            }, 1000);
+        }
+        
+        function performLogout() {
+            if (isLoggingOut) return;
+            
+            isLoggingOut = true;
+            clearInterval(countdownInterval);
+            
+            confirmLogoutBtn.innerHTML = '<div class="logout-loader"></div> Memproses logout...';
+            confirmLogoutBtn.disabled = true;
+            cancelLogoutBtn.disabled = true;
+            
+            setTimeout(function() {
+                clearAdminSession();
+                
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+        
+        function clearAdminSession() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminUsername');
+            localStorage.removeItem('adminRole');
+            localStorage.removeItem('lastLogin');
+            
+            sessionStorage.clear();
+            
+        }
+        
+        function cancelLogout() {
+            clearInterval(countdownInterval);
+            
+            if (confirm('Batalkan logout dan kembali ke dashboard?')) {
+                const isLoggedIn = localStorage.getItem('adminLoggedIn');
+                
+                if (isLoggedIn === 'true') {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    window.location.href = 'login.html';
+                }
+            } else {
+                countdown = 10;
+                countdownElement.textContent = countdown;
+                startAutoLogout();
+            }
+        }
+        
+        if (confirmLogoutBtn) {
+            confirmLogoutBtn.addEventListener('click', performLogout);
+        }
+        
+        if (cancelLogoutBtn) {
+            cancelLogoutBtn.addEventListener('click', cancelLogout);
+        }
+        
+        const isLoggedIn = localStorage.getItem('adminLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const adminName = localStorage.getItem('adminUsername') || 'Administrator';
+        const lastLogin = localStorage.getItem('lastLogin') || new Date().toLocaleString();
+        
+        const messageElement = document.querySelector('.logout-message');
+        if (messageElement) {
+            messageElement.innerHTML = `
+                <strong>${adminName}</strong>, Anda yakin ingin keluar dari Admin Panel PT Seirama Laju?<br>
+                Terakhir login: ${lastLogin}
+            `;
+        }
+        
+        startAutoLogout();
+        
+        const logoutCard = document.querySelector('.logout-card');
+        logoutCard.addEventListener('mouseenter', function() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                progressBar.style.animationPlayState = 'paused';
+            }
+        });
+        
+        logoutCard.addEventListener('mouseleave', function() {
+            if (!isLoggingOut) {
+                progressBar.style.animationPlayState = 'running';
+                startAutoLogout();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                cancelLogout();
+            } else if (e.key === 'Enter') {
+                performLogout();
+            } else if (e.key === 'l' && e.ctrlKey) {
+                e.preventDefault();
+                performLogout();
+            }
+        });
+        
+        window.history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function() {
+            window.history.pushState(null, null, window.location.href);
+        });
+    });
+    
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('../sw.js').then(function(registration) {
+                console.log('ServiceWorker registration successful');
+            }, function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+    </script>
+</body>
+</html>
